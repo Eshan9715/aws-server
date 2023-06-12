@@ -102,7 +102,7 @@ export const login = async (req,res,next)=>{
         id: existingUser?._id || existingMember?._id,
         role: existingUser?.role || existingMember?.role,
     },
-    eshan,  //process.env.JWT_KEY
+    "eshan",  //process.env.JWT_KEY
     {expiresIn:"1d"}
     );
     
