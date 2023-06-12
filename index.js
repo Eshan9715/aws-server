@@ -17,7 +17,7 @@ import hsRouter from './routes/hsCode-routes.js';
 const app = express();
 app.use(express.json());
 app.use(cors({
-    origin: "http://ec2-43-205-146-103.ap-south-1.compute.amazonaws.com"
+    origin: "http://127.0.0.1:8000"
 }));
 dotenv.config();
 
