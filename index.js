@@ -16,9 +16,7 @@ import hsRouter from './routes/hsCode-routes.js';
 
 const app = express();
 app.use(express.json());
-app.use(cors({
-    origin: "http://127.0.0.1:8000"
-}));
+app.use(cors());
 dotenv.config();
 
 app.use("/api/user",user_router);
