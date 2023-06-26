@@ -27,6 +27,7 @@ app.use("/api/lclquery", lclqueryRouter)
 app.use("/api/destination", destinyRouter)
 app.use("/api/line", lineRouter)
 app.use("/api/hsCodes", hsRouter)
+
 app.use("/api/auth", authRouter )
 
 const PORT = 8000;

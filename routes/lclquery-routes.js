@@ -1,5 +1,5 @@
 import express from "express";
-import { addBLLCLQuery, addLCLQuery, addMemberIdeaLCLQuery, addNewRateLCLQuery, addRatesLCLQuery, addScheduleLCLQuery, addShipIdeaLCLQuery, addShipperIdeaLCLQuery, addVesselLCLQuery, alterIsFinalRatLCLQuery, alterIsFinalSchLCLQuery, alterLinelCLQuery, alterStatusLCLQuery, alterStatusRateReply, deleteLCLQuery, getAllLCLQuries, getById, getByUserId, getCurrentLFinal, getLCLBLData, getMemberLastSeenLCLQuery, getRateReply, getRemarks, getShipperLastSeenLCLQuery, saveBLLCLQuery, saveMemberLastSeenLCLQuery, saveShipperLastSeenLCLQuery, updateCurrentLFinal } from "../controllers/lclquery-controller.js";
+import { addBLLCLQuery, addLCLQuery, addMemberIdeaLCLQuery, addNewRateLCLQuery, addRatesLCLQuery, addScheduleLCLQuery, addShipIdeaLCLQuery, addShipperIdeaLCLQuery, addVesselLCLQuery, alterIsFinalRatLCLQuery, alterIsFinalSchLCLQuery, alterLinelCLQuery, alterStatusLCLQuery, alterStatusRateReply, deleteLCLQuery, getAllLCLQuries, getById, getByUserId, getCurrentLFinal, getLCLBLData, getMemberLastSeenLCLQuery, getRateReply, getRatesByID, getRemarks, getSchedulesByID, getShipperLastSeenLCLQuery, saveBLLCLQuery, saveMemberLastSeenLCLQuery, saveShipperLastSeenLCLQuery, updateCurrentLFinal } from "../controllers/lclquery-controller.js";
 const lclqueryRouter = express.Router();
 
 lclqueryRouter.post("/add",addLCLQuery);
@@ -13,6 +13,9 @@ lclqueryRouter.get("/getRemarks/:id",getRemarks);
 lclqueryRouter.get("/getShipperLastSeen/:id",getShipperLastSeenLCLQuery);
 lclqueryRouter.get("/getMemberLastSeen/:id",getMemberLastSeenLCLQuery);
 lclqueryRouter.get("/getRateReply/:id",getRateReply);
+lclqueryRouter.get("/rates/:id",getRatesByID);
+lclqueryRouter.get("/schedules/:id",getSchedulesByID);
+
 
 
 lclqueryRouter.put("/addRates/:id",addRatesLCLQuery);

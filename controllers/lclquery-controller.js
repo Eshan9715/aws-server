@@ -128,6 +128,42 @@ export const addNewRateLCLQuery = async (req,res,next)=>{
     return res.status(200).json({lclquery})
 };
 
+
+export const getRatesByID = async (req,res,next)=>{
+    const lclID = req.params.id;
+    let lclquery;
+    try{
+        if (lclID.match(/^[0-9a-fA-F]{24}$/)) {
+        lclquery = await LCLQuery.findById(lclID, {rates:1, _id:0})
+        }
+    }catch(err){
+        console.log(err)
+    }
+    if(!lclquery){
+        return res.status(404).json({message:"No lclquery found"})
+    }
+    return res.status(200).json({lclquery})
+
+}
+
+export const getSchedulesByID = async (req,res,next)=>{
+    const lclID = req.params.id;
+    let lclquery;
+    try{
+        if (lclID.match(/^[0-9a-fA-F]{24}$/)) {
+        lclquery = await LCLQuery.findById(lclID, {schedules:1, _id:0})
+        }
+    }catch(err){
+        console.log(err)
+    }
+    if(!lclquery){
+        return res.status(404).json({message:"No lclquery found"})
+    }
+    return res.status(200).json({lclquery})
+
+}
+
+
 export const alterStatusLCLQuery = async (req,res,next)=>{
     var lclqueryId = req.params.id;
     const {status} = req.body;
@@ -347,7 +383,7 @@ export const alterIsFinalRatLCLQuery = async (req,res,next)=>{
         if (lclqueryId.match(/^[0-9a-fA-F]{24}$/)) {
         lclquery = await LCLQuery.updateOne(
             {  _id: lclqueryId },
-            { $set: { "rates.isFinal" : isFinal } }
+            { $set: { "rates.$[].isFinal" : isFinal } }
          )
        
         }}
@@ -359,8 +395,8 @@ export const alterIsFinalRatLCLQuery = async (req,res,next)=>{
 
     }
     return res.status(200).json({lclquery})
-
 };
+
 
 export const alterLinelCLQuery = async (req,res,next)=>{
     const lclqueryId = req.params.id;
@@ -531,7 +567,7 @@ export const addVesselLCLQuery = async (req,res,next)=>{
     let lclquery;
     try{
         if (lclqueryId.match(/^[0-9a-fA-F]{24}$/)) {
-        lclquery = await LCLQuery.findByIdAndUpdate(id,{
+        lclquery = await LCLQuery.findByIdAndUpdate(lclqueryId,{
             status,selVessel
         })
         }}

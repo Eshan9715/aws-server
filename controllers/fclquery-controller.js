@@ -619,6 +619,7 @@ export const addCutOffFCLQuery = async (req,res,next)=>{
 
 };
 
+
 export const addBLFCLQuery = async (req,res,next)=>{
     // const fclqueryId = req.params.id;
     const {id,status, blData} = req.body;

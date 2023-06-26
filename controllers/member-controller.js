@@ -45,12 +45,34 @@ export const getAllMembers = async (req,res,next)=>{
 }
 
 export const addCRDToSalesman = async (req,res,next)=>{
-    // const fclqueryId = req.params.id;
-    const {assigned,id} = req.body;
+    const memID = req.params.id;
+    //console.log(memID);
+    const {assigned} = req.body;
     let member;
     try{
-        member = await Member.findByIdAndUpdate(id,{
+        if (memID.match(/^[0-9a-fA-F]{24}$/)) {
+        member = await Member.findByIdAndUpdate(memID,{
             assigned })
+        }
+    }
+    catch(err){
+       return console.log(err);
+    }
+    if(!member){
+        return res.status(404).json({message:"Unable to update the member!"})
+
+    }
+    return res.status(200).json({member})
+
+};
+
+export const changeMemberRole = async (req,res,next)=>{
+    const memID = req.params.id;
+    const {role} = req.body;
+    let member;
+    try{
+        member = await Member.findByIdAndUpdate(memID,{
+            role })
         }
     catch(err){
        return console.log(err);
