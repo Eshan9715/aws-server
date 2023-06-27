@@ -563,14 +563,16 @@ export const addScheduleLCLQuery = async (req,res,next)=>{
 
 export const addVesselLCLQuery = async (req,res,next)=>{
     const lclqueryId = req.params.id;
-    const {status, selVessel} = req.body;
+    const {selVessel,isFinal} = req.body;
     let lclquery;
     try{
         if (lclqueryId.match(/^[0-9a-fA-F]{24}$/)) {
-        lclquery = await LCLQuery.findByIdAndUpdate(lclqueryId,{
-            status,selVessel
-        })
-        }}
+            lclquery = await LCLQuery.updateOne(
+                { _id: lclqueryId, "schedules.vessel": selVessel},
+                { $set: { "schedules.$.isFinal" : isFinal } }
+            )
+        }
+    }
     catch(err){
        return console.log(err);
     }
